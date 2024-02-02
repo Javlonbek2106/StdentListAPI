@@ -11,13 +11,14 @@ namespace StudentList.Infrastructure
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<IStudentDbContext, StudentDbContext>(options =>
+            services.AddDbContext<IStudentDbContext, StudentDbContext>(optionsBuilder =>
             {
-                options.UseNpgsql(configuration.GetConnectionString("DbConnect"));
-                options.UseLazyLoadingProxies();
+                optionsBuilder.UseNpgsql(configuration.GetConnectionString("DbConnect"));
+                optionsBuilder.UseLazyLoadingProxies(); // Apply this on optionsBuilder
             });
 
             services.AddScoped<IStudentDbContext, StudentDbContext>();
+
 
             services.AddScoped<AuditableEntitySaveChangesInterceptor>();
 

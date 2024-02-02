@@ -6,8 +6,9 @@ using System.Reflection;
 
 namespace StudentList.Infrastructure.Context
 {
-    public class StudentDbContext(AuditableEntitySaveChangesInterceptor _auditableEntitySaveChangesInterceptor) : DbContext, IStudentDbContext
+    public class StudentDbContext : DbContext, IStudentDbContext
     {
+        private readonly AuditableEntitySaveChangesInterceptor _auditableEntitySaveChangesInterceptor;
         public StudentDbContext(
       DbContextOptions<StudentDbContext> options,
       AuditableEntitySaveChangesInterceptor auditableEntitySaveChangesInterceptor)
